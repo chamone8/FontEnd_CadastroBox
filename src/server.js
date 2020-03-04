@@ -37,6 +37,4 @@ app.use('/files', express.static(path.resolve(__dirname, '..', 'temp')));
 
 app.use(require('./routes'));
 
-app.listen(90, (req, res) => {
-    console.log("Conectado");
-});
+app.listen(process.env.PORT || 90);
