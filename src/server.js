@@ -11,9 +11,9 @@ app.use(cors());
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-io.on("connection", Socket => {
-    Socket.on("connectRoom", box => {
-        Socket.join(box);
+io.on("connection", socket => {
+    socket.on("connectRoom", box => {
+        socket.join(box);
     })
 });
 
