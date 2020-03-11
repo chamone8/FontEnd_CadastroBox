@@ -18,15 +18,15 @@ var corsOptions = {
 // }
 
 const app = express();
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+app.use(cors());
+//app.options('*', cors());
 // app.use(allowCrossDomain);
 
 
 //inicio da conexão individual 
 const server = require('https').Server(app);
 const io = require('socket.io')(server);
-io.origins(['*']);
+io.origins('*:*');
 io.on("connection", socket => {
     socket.on("connectRoom", box => {
         socket.join(box);
