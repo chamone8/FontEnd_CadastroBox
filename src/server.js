@@ -18,8 +18,8 @@ var corsOptions = {
 // }
 
 const app = express();
-app.use(cors());
-app.options('*', cors());
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 // app.use(allowCrossDomain);
 
 
