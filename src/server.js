@@ -8,7 +8,7 @@ app.use(cors());
 
 
 //inicio da conexão individual 
-const server = require('http').Server(app);
+const server = require('https').Server(app);
 const io = require('socket.io')(server);
 io.origins(['*']);
 io.on("connection", socket => {
