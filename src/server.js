@@ -26,7 +26,10 @@ app.use(cors());
 //inicio da conexão individual 
 const server = require('https').Server(app);
 const io = require('socket.io')(server);
-io.origins('*:*');
+//io.origins('*:*');
+
+io.set('origins', '*');
+
 io.on("connection", socket => {
     socket.on("connectRoom", box => {
         socket.join(box);
