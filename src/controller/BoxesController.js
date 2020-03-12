@@ -4,14 +4,12 @@ const Box = require("../models/Box");
 class BoxesController{
 
     async show(req,res){
-        //Populate esta trasendo todos os dados do file e ordernando desc 
-        const box = await Box.find().toArray(function(err, result) {
-            if (err) throw err;
-            console.log(result);
-            
-          });
+        const {page = 1} = req.query;
+        const box = await Box.paginate({}, {page, limit:10} );
         
-        return res.box;
+        return res.json(box);
+
+        
     }
 
 }
