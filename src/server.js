@@ -3,37 +3,20 @@ const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
 
-var corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
-
-//CORS middleware
-// var allowCrossDomain = function(req, res, next) {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTION');
-//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-
-//     next();
-// }
-
 const app = express();
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
-// app.use(allowCrossDomain);
+app.use(cors());
 
 
 //inicio da conexão individual 
-const server = require('https').Server(app);
-const io = require('socket.io')(server);
-//io.origins('*:*');
+const server = require('http').Server(app);
 
-io.set('origins', '*');
+const io = require('socket.io')(server);
 
 io.on("connection", socket => {
     socket.on("connectRoom", box => {
         socket.join(box);
     })
+    
 });
 
 //fim da conexão individual 
@@ -56,4 +39,5 @@ app.use('/files', express.static(path.resolve(__dirname, '..', 'temp')));
 
 app.use(require('./routes'));
 
-app.listen(process.env.PORT || 90);
+server.listen(process.env.PORT || 90);//sem o server não funciona
+

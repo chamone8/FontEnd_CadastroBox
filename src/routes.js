@@ -6,11 +6,15 @@ const multerConfig = require('./config/multerConfig');
 const router = express.Router();
 const BoxController = require('./controller/BoxController');
 
+const BoxesController = require('./controller/BoxesController');
+
 const FileController = require('./controller/FileController');
 
 
 router.post('/boxes', BoxController.store);
-router.get('/boxes/:id',BoxController.show)
+router.get('/boxes/:id',BoxController.show);
+router.get('/boxe', BoxesController.show);
+
 
 
 
