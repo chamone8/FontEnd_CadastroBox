@@ -8,7 +8,7 @@ app.use(cors());
 
 
 //inicio da conexão individual 
-const server = require('http').Server(app);
+const server = require('https').Server(app);
 
 const io = require('socket.io')(server);
 
@@ -40,4 +40,5 @@ app.use('/files', express.static(path.resolve(__dirname, '..', 'temp')));
 app.use(require('./routes'));
 
 server.listen(process.env.PORT || 90);//sem o server não funciona
+
 
